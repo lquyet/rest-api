@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "lint": "npx eslint **/*.js --ignore-pattern node_modules/",
+    "fix-lint": "npx eslint **/*.js --fix --ignore-pattern node_modules/"
   },
   "repository": {
     "type": "git",
@@ -22,6 +24,8 @@
     "express": "^4.18.1"
   },
   "devDependencies": {
+    "eslint": "^8.22.0",
+    "eslint-config-google": "^0.14.0",
     "nodemon": "^2.0.19"
   }
 }
