@@ -1,10 +1,22 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const mongoose = require('mongoose');
+
+// Load Environment Variables
+require('dotenv').config();
 
 const app = express();
 
 const port = process.env.PORT || 3000;
+
+mongoose.connect(process.env.MONGO_URL, (err) => {
+    if (err) {
+        console.log(err);
+    } else {
+        console.log('Connected to MongoDB');
+    }
+});
 
 const productRouter = require('./src/v1/routes/productRoutes');
 
@@ -26,7 +38,16 @@ app.use((req, res, next) => {
     );
     if (req.method == 'OPTIONS') {
         res.header('Access-Control-Allow-Methods', 'POST, PATCH, DELETE, GET');
-        res.status(200).json({});
+        return res.status(200).json({});
+    }
+    if (req.method !== 'OPTIONS' &&
+    req.method !== 'GET' &&
+    req.method !== 'POST' &&
+    req.method !== 'DELETE' &&
+    req.method !== 'PATCH') {
+        const error = new Error('Method not allowed');
+        error.status = 405;
+        next(error);
     }
     next();
 });
