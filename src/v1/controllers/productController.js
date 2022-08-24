@@ -1,31 +1,102 @@
 const productService = require('../services/productService');
-const validate = require('./productValidator');
+const {validate, validateUpdate} = require('./productValidator');
 
-const getAllProducts = (req, res, next) => {
-    res.send('Get all products');
+// Using async/await
+const getAllProducts = async (req, res, next) => {
+    let products = null;
+    try {
+        products = await productService.getAllProducts();
+        if (products) {
+            res.status(200).json({
+                'status': 'success',
+                'products': products,
+            });
+        } else {
+            const e = new Error('Product not found');
+            e.status = 404;
+            return next(e);
+        }
+    } catch (error) {
+        const e = new Error('Cannot get all products');
+        return next(e);
+    }
 };
 
-const getProductById = (req, res, next) => {
+const getProductById = async (req, res, next) => {
     const id = req.params.productId;
-    res.status(200).json({
-        'message': 'Product with ID ' + id + ' fetched',
-    });
+    let product = null;
+    try {
+        product = await productService.getProductById(id);
+        if (product) {
+            res.status(200).json({
+                'status': 'success',
+                'product': product,
+            });
+        } else {
+            const e = new Error('Product not found');
+            e.status = 404;
+            return next(e);
+        }
+    } catch (error) {
+        const e = new Error('Cannot get product');
+        return next(e);
+    }
 };
 
-const deleteProductById = (req, res, next) => {
+const deleteProductById = async (req, res, next) => {
     const id = req.params.productId;
-    res.status(200).json({
-        'message': 'Product with ID ' + id + ' deleted',
-    });
+    let deletedProduct = null;
+    try {
+        deletedProduct = await productService.deleteProductById(id);
+        if (deletedProduct) {
+            res.status(200).json({
+                'status': 'success',
+                'product': deletedProduct,
+            });
+        } else {
+            const e = new Error('Product not found');
+            e.status = 404;
+            return next(e);
+        }
+    } catch (error) {
+        const e = new Error('Cannot delete product');
+        return next(e);
+    }
 };
 
-const updateProductById = (req, res, next) => {
+
+const updateProductById = async (req, res, next) => {
     const id = req.params.productId;
-    res.status(200).json({
-        'message': 'Product with ID ' + id + ' updated',
-    });
+    let updateParams = null;
+    try {
+        updateParams = await validateUpdate(req.body);
+    } catch (err) {
+        const e = new Error('Product data is not valid');
+        e.status = 400;
+        return next(e);
+    }
+
+    let updatedProduct = null;
+    try {
+        updatedProduct = await productService.updateProductById(id, updateParams);
+        if (updatedProduct) {
+            res.status(200).json({
+                'status': 'success',
+                'product': updatedProduct,
+            });
+        } else {
+            const e = new Error('Product not found');
+            e.status = 404;
+            return next(e);
+        }
+    } catch (error) {
+        console.log(error);
+        const e = new Error('Cannot update product');
+        return next(e);
+    }
 };
 
+// Using pure promises
 const createProduct = (req, res, next) => {
     const productData = {
         name: req.body.name,
@@ -43,12 +114,12 @@ const createProduct = (req, res, next) => {
         }).catch((error) => {
             const e = new Error('Product created failed');
             e.status = 400;
-            next(e);
+            return next(e);
         });
     }).catch((error) => {
         const e = new Error('Product data is not valid');
         e.status = 400;
-        next(e);
+        return next(e);
     });
 };
 

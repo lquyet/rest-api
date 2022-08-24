@@ -12,6 +12,7 @@
     },
     "rules": {
         "linebreak-style": 0,
-        "indent": ["error", 4]
+        "indent": ["error", 4],
+        "max-len": 0
     }
 }

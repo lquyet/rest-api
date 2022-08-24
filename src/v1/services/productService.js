@@ -1,20 +1,20 @@
 const mongoose = require('mongoose');
 const Product = require('../database/product');
 
-const getAllProducts = (req, res, next) => {
-    return;
+const getAllProducts = () => {
+    return Product.getAllProducts();
 };
 
-const getProductById = (req, res, next) => {
-    return;
+const getProductById = (productId) => {
+    return Product.getProductById(productId);
 };
 
-const deleteProductById = (req, res, next) => {
-    return;
+const deleteProductById = (productId) => {
+    return Product.deleteProductById(productId);
 };
 
-const updateProductById = (req, res, next) => {
-    return;
+const updateProductById = (productId, updateParams) => {
+    return Product.updateProductById(productId, updateParams);
 };
 
 const createProduct = (productData) => {

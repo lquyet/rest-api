@@ -15,10 +15,26 @@ const productSchema = {
         quantity: {type: 'number'},
     },
     required: ['name', 'description', 'price', 'quantity'],
+    additionalProperties: false,
+};
+
+const productUpdateSchema = {
+    $async: true,
+    type: 'object',
+    properties: {
+        name: {type: 'string'},
+        description: {type: 'string'},
+        price: {type: 'number'},
+        quantity: {type: 'number'},
+    },
+    additionalProperties: false,
 };
 
 const validate = ajv.compile(productSchema);
+const validateUpdate = ajv.compile(productUpdateSchema);
 
-
-module.exports = validate;
+module.exports = {
+    validate,
+    validateUpdate,
+};
 
