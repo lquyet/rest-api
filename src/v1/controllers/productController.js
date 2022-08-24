@@ -1,11 +1,10 @@
 const productService = require('../services/productService');
-const {validate, validateUpdate} = require('./productValidator');
+const {validate, validateUpdate} = require('./validators/productValidator');
 
 // Using async/await
 const getAllProducts = async (req, res, next) => {
-    let products = null;
     try {
-        products = await productService.getAllProducts();
+        const products = await productService.getAllProducts();
         if (products) {
             res.status(200).json({
                 'status': 'success',
@@ -24,9 +23,8 @@ const getAllProducts = async (req, res, next) => {
 
 const getProductById = async (req, res, next) => {
     const id = req.params.productId;
-    let product = null;
     try {
-        product = await productService.getProductById(id);
+        const product = await productService.getProductById(id);
         if (product) {
             res.status(200).json({
                 'status': 'success',
@@ -45,9 +43,8 @@ const getProductById = async (req, res, next) => {
 
 const deleteProductById = async (req, res, next) => {
     const id = req.params.productId;
-    let deletedProduct = null;
     try {
-        deletedProduct = await productService.deleteProductById(id);
+        const deletedProduct = await productService.deleteProductById(id);
         if (deletedProduct) {
             res.status(200).json({
                 'status': 'success',
@@ -64,21 +61,19 @@ const deleteProductById = async (req, res, next) => {
     }
 };
 
-
 const updateProductById = async (req, res, next) => {
     const id = req.params.productId;
-    let updateParams = null;
+    const updateParams = req.body;
     try {
-        updateParams = await validateUpdate(req.body);
+        await validateUpdate(updateParams);
     } catch (err) {
         const e = new Error('Product data is not valid');
         e.status = 400;
         return next(e);
     }
 
-    let updatedProduct = null;
     try {
-        updatedProduct = await productService.updateProductById(id, updateParams);
+        const updatedProduct = await productService.updateProductById(id, updateParams);
         if (updatedProduct) {
             res.status(200).json({
                 'status': 'success',
