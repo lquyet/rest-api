@@ -5,19 +5,19 @@ const getAllProducts = () => {
     return Product.getAllProducts();
 };
 
-const getProductById = (productId) => {
+const getProductById = async (productId) => {
     return Product.getProductById(productId);
 };
 
-const deleteProductById = (productId) => {
+const deleteProductById = async (productId) => {
     return Product.deleteProductById(productId);
 };
 
-const updateProductById = (productId, updateParams) => {
+const updateProductById = async (productId, updateParams) => {
     return Product.updateProductById(productId, updateParams);
 };
 
-const createProduct = (productData) => {
+const createProduct = async (productData) => {
     productData['_id'] = new mongoose.Types.ObjectId();
     return Product.createProduct(productData);
 };
