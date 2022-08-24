@@ -9,8 +9,8 @@ const productSchema = {
     $async: true,
     type: 'object',
     properties: {
-        name: {type: 'string'},
-        description: {type: 'string'},
+        name: {type: 'string', maxLength: 100},
+        description: {type: 'string', maxLength: 500},
         price: {type: 'number'},
         quantity: {type: 'number'},
     },
@@ -22,8 +22,8 @@ const productUpdateSchema = {
     $async: true,
     type: 'object',
     properties: {
-        name: {type: 'string'},
-        description: {type: 'string'},
+        name: {type: 'string', maxLength: 100},
+        description: {type: 'string', maxLength: 500},
         price: {type: 'number'},
         quantity: {type: 'number'},
     },
