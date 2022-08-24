@@ -19,6 +19,7 @@ mongoose.connect(process.env.MONGO_URL, (err) => {
 });
 
 const productRouter = require('./src/v1/routes/productRoutes');
+const userRouter = require('./src/v1/routes/userRoutes');
 
 // Use morgan to log requests to the console
 app.use(morgan('dev'));
@@ -56,6 +57,7 @@ app.use((req, res, next) => {
 app.disable('x-powered-by');
 
 app.use('/v1/products', productRouter);
+app.use('/v1/users', userRouter);
 
 // Handle requests to invalid resources
 // Also handle not-supported HTTP methods, needed to seperate from 404 error
