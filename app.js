@@ -22,7 +22,9 @@ const productRouter = require('./src/v1/routes/productRoutes');
 const userRouter = require('./src/v1/routes/userRoutes');
 
 // Use morgan to log requests to the console
-app.use(morgan('dev'));
+if (process.env.NODE_ENV === 'dev') {
+    app.use(morgan('dev'));
+}
 
 // Set up body-parser
 app.use(bodyParser.urlencoded({extended: false}));
