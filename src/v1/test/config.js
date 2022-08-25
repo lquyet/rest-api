@@ -1,6 +1,6 @@
 // Set env variables for testing
 process.env.NODE_ENV = 'test';
-process.env.MONGO_URL = 'mongodb://127.0.0.1:27017/rest-api-nodejs-mongodb';
+process.env.MONGO_URL = 'mongodb://127.0.0.1:27017/rest-api';
 process.env.JWT_SECRET = 'secret';
 process.env.JWT_EXPIRATION = '1d';
 
