@@ -40,7 +40,7 @@ app.use((req, res, next) => {
         'Origin, X-Requested-With, Content-Type, Accept, Authorization',
     );
     if (req.method == 'OPTIONS') {
-        res.header('Access-Control-Allow-Methods', 'POST, PATCH, DELETE, GET');
+        res.header('Access-Control-Allow-Methods', 'POST, PATCH, DELETE, GET, OPTIONS');
         return res.status(200).json({});
     }
     if (req.method !== 'OPTIONS' &&
@@ -78,6 +78,9 @@ app.use((error, req, res, next) => {
     });
 });
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log('Server started on port ' + port);
 });
+
+
+module.exports = server;

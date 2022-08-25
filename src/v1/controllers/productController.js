@@ -67,7 +67,7 @@ const updateProductById = async (req, res, next) => {
     try {
         await validateUpdate(updateParams);
     } catch (err) {
-        const e = new Error('Product data is not valid');
+        const e = new Error('Invalid product data');
         e.status = 400;
         return next(e);
     }
@@ -85,7 +85,6 @@ const updateProductById = async (req, res, next) => {
             return next(e);
         }
     } catch (error) {
-        console.log(error);
         const e = new Error('Cannot update product');
         return next(e);
     }
@@ -93,12 +92,7 @@ const updateProductById = async (req, res, next) => {
 
 // Using pure promises
 const createProduct = (req, res, next) => {
-    const productData = {
-        name: req.body.name,
-        description: req.body.description,
-        price: req.body.price,
-        quantity: req.body.quantity,
-    };
+    const productData = req.body;
 
     validate(productData).then((valid) => {
         productService.createProduct(productData).then((product) => {
@@ -112,7 +106,7 @@ const createProduct = (req, res, next) => {
             return next(e);
         });
     }).catch((error) => {
-        const e = new Error('Product data is not valid');
+        const e = new Error('Invalid product data');
         e.status = 400;
         return next(e);
     });

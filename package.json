@@ -4,7 +4,7 @@
   "description": "a RESTful API using Node.js, Express, and MongoDB",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "nyc mocha src/v1/test --timeout 10000 --report --exit",
     "start": "nodemon app.js",
     "lint": "npx eslint **/*.js --ignore-pattern node_modules/",
     "fix-lint": "npx eslint **/*.js --fix --ignore-pattern node_modules/"
@@ -29,9 +29,13 @@
     "mongoose": "^6.5.2"
   },
   "devDependencies": {
+    "chai": "^4.3.6",
+    "chai-http": "^4.3.0",
     "eslint": "^8.22.0",
     "eslint-config-google": "^0.14.0",
+    "mocha": "^10.0.0",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.19"
+    "nodemon": "^2.0.19",
+    "nyc": "^15.1.0"
   }
 }

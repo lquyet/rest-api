@@ -56,7 +56,7 @@ const verifyUser = async (req, res, next) => {
             }
         } else {
             const e = new Error('Wrong email or password');
-            e.status = 404;
+            e.status = 400;
             return next(e);
         }
     } catch (error) {
