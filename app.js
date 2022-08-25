@@ -60,7 +60,6 @@ app.use('/v1/products', productRouter);
 app.use('/v1/users', userRouter);
 
 // Handle requests to invalid resources
-// Also handle not-supported HTTP methods, needed to seperate from 404 error
 app.use((req, res, next) => {
     const error = new Error('Invalid request! No resource was found!');
     error.status = 404; // Not Found

@@ -1,5 +1,6 @@
 const userService = require('../services/userService');
 const {validate} = require('./validators/userValidator');
+const {createToken} = require('../authentication/jwt');
 
 const createUser = async (req, res, next) => {
     const userData = req.body;
@@ -16,7 +17,6 @@ const createUser = async (req, res, next) => {
         if (user) {
             res.status(200).json({
                 'status': 'success',
-                // 'user': user.email,
             });
         } else {
             const error = new Error('User already exists');
@@ -43,10 +43,17 @@ const verifyUser = async (req, res, next) => {
     try {
         const user = await userService.verifyUser(userData);
         if (user) {
-            res.status(200).json({
-                'status': 'success',
-                'user': user,
-            });
+            try {
+                const token = await createToken({email: userData.email, id: user._id});
+                res.status(200).json({
+                    'status': 'success',
+                    'token': token,
+                });
+            } catch (error) {
+                console.log(error);
+                const e = new Error('Cannot create token');
+                return next(e);
+            }
         } else {
             const e = new Error('Wrong email or password');
             e.status = 404;
