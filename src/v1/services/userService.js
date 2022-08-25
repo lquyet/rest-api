@@ -18,7 +18,11 @@ const createUser = async (userData) => {
 };
 
 const verifyUser = async (userData) => {
-    return;
+    const user = await User.verifyUser(userData.email);
+    if (user != null) {
+        return await bcrypt.compare(userData.password, user.password);
+    }
+    return Promise.resolve(null);
 };
 
 module.exports = {

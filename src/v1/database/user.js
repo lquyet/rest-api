@@ -9,8 +9,8 @@ const createUser = async (userData) => {
     return newUser.save();
 };
 
-const verifyUser = async (userData) => {
-    const user = await User.findOne(userData).exec();
+const verifyUser = async (userEmail) => {
+    const user = await User.findOne({email: userEmail}).exec();
     return user;
 };
 
