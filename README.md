@@ -1,21 +1,18 @@
 # Node.JS REST API Starter Kit
 
-
-[![Author](http://img.shields.io/badge/author-@lquyet-pink.svg)](https://www.linkedin.com/in/minhquyetle/) 
-[![GitHub license](https://img.shields.io/github/license/lquyet/rest-api?color=white)](https://github.com/lquyet/rest-api/blob/main/LICENSE) 
+[![Author](http://img.shields.io/badge/author-@lquyet-pink.svg)](https://www.linkedin.com/in/minhquyetle/)
+[![GitHub license](https://img.shields.io/github/license/lquyet/rest-api?color=white)](https://github.com/lquyet/rest-api/blob/main/LICENSE)
 ![GitHub repo size](https://img.shields.io/github/repo-size/lquyet/rest-api)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/f081ba0b67bb41a7a033adc36ecff0d0)](https://www.codacy.com/gh/lquyet/rest-api/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=lquyet/rest-api&amp;utm_campaign=Badge_Grade) 
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/f081ba0b67bb41a7a033adc36ecff0d0)](https://www.codacy.com/gh/lquyet/rest-api/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=lquyet/rest-api&amp;utm_campaign=Badge_Grade)
 ![Github Action](https://img.shields.io/github/workflow/status/lquyet/rest-api/Node.js%20CI/main)
 
 A feature-rich boilerplate for NodeJS RESTful API Development
 
 ## Getting started
 
-This project provides a skeleton for any further RESTful API development. It implements the **3 Layer Architecture**, which are Controller, Service Layer and Data Access Layer. 
+This project provides a skeleton for any further RESTful API development. It implements the **3 Layer Architecture**, which are Controller, Service Layer and Data Access Layer.
 
-<p align="center">
-<img src="https://i.imgur.com/Qc1evoH.png" width="400" height="450" align="center">
-</p>
+<p align="center"> <img src="https://i.imgur.com/Qc1evoH.png" width="400" height="450" align="center"> </p>
 
 **Controller** will handle all stuffs related to requests and responses that are routed by *Router*. It will then call **Service Layer** methods which storing all business logic. The **Data Access Layer** will perform some operations on the database.
 
@@ -46,7 +43,7 @@ I am open for a good job or work contract. Contact me with my email [quyetlm.wor
 
 ### Using Git (recommended)
 
-1.  Clone the project
+1. Clone the project
 
 ```bash
 git clone https://github.com/lquyet/rest-api.git ./myproject
@@ -54,8 +51,8 @@ git clone https://github.com/lquyet/rest-api.git ./myproject
 
 ### Using manual download ZIP
 
-1.  Download repository
-2.  Uncompress to your desired directory
+1. Download repository
+2. Uncompress to your desired directory
 
 ### Install npm dependencies after installing (Git or manual download)
 
@@ -66,16 +63,18 @@ npm install
 
 ### Setting up environments
 
-1.  You will find a file named `.env.example` on root directory of project.
-2.  Create a new file by copying and pasting the file and then renaming it to just `.env`
+1. You will find a file named `.env.example` on root directory of project.
+2. Create a new file by copying and pasting the file and then renaming it to just `.env`
+
     ```bash
     cp .env.example .env
     ```
-3.  Set the appropriate value for your environment variables.
+
+3. Set the appropriate value for your environment variables.
 
 ## Project structure
 
-```
+```text
 rest-api
 ├─ .eslintrc.json
 ├─ .github
@@ -134,7 +133,6 @@ npm start
 npm test
 ```
 
-
 ## ESLint
 
 ### Running Eslint
@@ -157,4 +155,4 @@ Feel free to report any bugs or improvements by setting a new Issue or Pull requ
 
 ## License
 
-This project is open-sourced software licensed under the MIT License. 
+This project is open-sourced software licensed under the MIT License.
